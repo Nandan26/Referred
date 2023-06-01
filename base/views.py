@@ -86,8 +86,11 @@ def register_page(request):
         else:
             if form.has_error('username'):
                 messages.error(request,'user with this username already exists')
-            else:
-                messages.error(request, 'Password is too weak!!')
+            elif form.has_error('password1'):
+                messages.error(request,'Password is too week!!!')
+            elif form.has_error('password2'):
+                messages.error(request, 'Password entred in both fields are not matching!!')
+    
     context = {
         'page': page,
         'form': form

@@ -1,0 +1,54 @@
+{% extends 'main_no_navbar.html' %}
+
+{% block content%}
+<main class="create-room layout">
+    <h1 class="header-applications">
+        <b>Requirements for {{room.position}} position at {{room.company}}</b>    
+    </h1>
+    <h3 class="header-applications-small" style="margin: 1.5rem 0;">
+        <a href="{% url 'room' room.id %}">Go back to apply section</a>
+    </h3>
+    <div class="container--3">
+        <div class="participants">
+        <h3 class="participants__top">Skills Required</h3>
+        <div class="participants__list scroll">
+        <ul>
+            
+            {% for skill in skills %}
+            <li>
+            {{skill}}
+            </li>
+            {% endfor %}
+
+        </ul> 
+        
+        </div>
+        </div>
+        <br><br>  
+        <div class="participants">
+        <h3 class="participants__top">Experience Required (in Years)</h3>
+        <div class="participants__list_dummy scroll">
+        {% if room.experience is not None%}
+        <p style="color:var(--color-dark)">{{room.experience}}</p>
+        {% else %}
+        <p style="color:var(--color-dark)">Fresher</p>
+        {% endif %}
+        </div>
+        </div>
+        <br>
+        <div class="participants">
+        <!-- <h3 class="participants__top">Link to career Page</h3> -->
+        <div class="participants__list_dummy scroll">
+        <p style="color:var(--color-dark)"> Go to Career Page of Company 
+            {% if room.link is not None %}
+            <a href="{{ room.link }}" style="color: var(--color-dark); text-decoration: underline;">(You can direct apply here)</a></p>
+            {% else %}
+            <p style="color: var(--color-dark);">(Link not Provided)</p>
+            {% endif %}
+        </div>
+  </div>
+
+</div>
+</main>
+
+{% endblock %}

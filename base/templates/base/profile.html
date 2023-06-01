@@ -1,0 +1,102 @@
+{% extends 'main.html' %}
+
+{% block content %}
+<main class="profile-page layout layout--3">
+  <div class="container">
+    <!-- Topics Start -->
+    {% if request.user == user %}
+    {% include 'base/following-list.html' %}
+    {% else %}
+    {% include 'base/company.html' %}
+    {% endif %}
+
+    <!-- Topics End -->
+
+    <!-- Room List Start -->
+    <div class="roomList">
+      <div class="profile">
+        <div class="profile__avatar">
+          <div class="avatar avatar--large active">
+            <img src="{{ user.avatar.url }}" />
+          </div>
+        </div>
+        <div class="profile__info">
+          <h3>{{user.name}}</h3>
+          <p>@{{user.username}}</p>
+
+          {% if user == request.user %}
+          <div class="mobile-menu" style="margin-top: 1rem;margin-bottom: 1rem;">
+            <div class="mobile-menuItems">
+              <a class="btn btn--main btn--pill" href="{% url 'following'  %}">Recruiters you follow</a>
+              <a class="btn btn--main btn--pill" href="{% url 'user-activity' user.id%}">Recent Activities</a>
+            </div>
+          </div>
+          <a href="{% url 'update-user' %}" class="btn btn--main btn--pill">Edit Profile</a>
+          <br>
+          <a href="{% url 'myApplications' %}" class="btn btn--main btn--pill" style="margin-top: 1rem;">View my applications</a>  
+          {% else %}
+            {% if is_following %}
+                
+              <form method="POST" action="{% url 'remove-follower' user.id %}">
+                {% csrf_token %}
+                <button class="btn btn--main btn--pill" type=submit>Unfollow</button>
+              </form>
+            {% else %}
+              <form method="POST" action="{% url 'add-follower' user.id %}">
+                {% csrf_token %}
+                <button class="btn btn--main btn--pill" type=submit>Follow</button>
+              </form>
+            {% endif %}
+            <div class="mobile-menu" style="margin-top: 1rem;margin-bottom: 1rem;">
+              <div class="mobile-menuItems">
+                <a class="btn btn--main btn--pill" href="{% url 'comps'  %}">Browse Companies</a>
+                <a class="btn btn--main btn--pill" href="{% url 'user-activity' user.id%}">Recent Activities</a>
+              </div>
+            </div>
+          {% endif %}
+      
+          <p style="margin-top: 0.4rem;">Followers: {{number_of_followers}}</p>
+        </div>
+        <div class="profile__about">
+          <h3>About</h3>
+          <p style="color: var(--color-dark-medium);">
+            {{ user.bio }}
+          </p>
+          <br>
+          <p style="color: var(--color-dark-medium);">
+            Linkedin Profile: 
+            {% if user.linkedin is not None %}
+            <a href="{{ user.linkedin }}" style="text-decoration: underline;">
+            {{ user.linkedin }}
+            </a>
+            {% else %}
+            None
+            {% endif %}
+          </p>  
+        </div>
+      </div>
+
+      <div class="roomList__header">
+        <div>
+          {% if request.user == user%}
+          <h2>Opportunities Posted by You
+          </h2>
+          {% else %}
+          <h2>Opportunities Posted by {{user.name}}
+          </h2>
+          {% endif %}
+        </div>
+      </div>
+    
+      {% include 'base/feed.html' %}
+
+
+    </div>
+    <!-- Room List End -->
+
+    <!-- Activities Start -->
+    {% include 'base/activity.html' %}
+    <!-- Activities End -->
+  </div>
+</main>
+{% endblock content %}

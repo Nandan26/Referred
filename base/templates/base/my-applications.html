@@ -1,0 +1,121 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<h1 class="header-applications">
+  <b>Selected Applications for Referral</b>
+</h1>
+{% if selected_application %}
+
+<div class="table-container--2">
+<table class="styled-table">
+  <thead>
+    <tr>
+      <th>Recruiter</th>
+      <th>Company</th>
+      <th>Position</th>
+      <th>Applied</th>
+      <th>Status</th>  
+      <th>
+        Your Resume
+      </th>
+    </tr>
+  </thead>
+  
+  <tbody>
+    {% for application in selected_application %}
+    <tr>
+      <td><a href="{% url 'user-profile' application.opportunity.recruiter.id %}">{{ application.opportunity.recruiter }}</a></td>
+      <td>{{ application.opportunity.company }}</td>
+      <td> <a href="{% url 'room' application.opportunity.id %}">{{ application.opportunity.position }}</a></td>
+      <td>{{application.applied|timesince}} ago</td>
+      <td>
+        <p class="status-selected">Reffered</p>
+      </td>
+      <td>
+        {% if application.resume %}
+        <a href="{{application.resume.url}}" target="_blank">View</a>
+        {% else %}
+        <p>No Resume Provided!</p>
+        {% endif %}
+      </td>
+      
+    </tr>
+
+    {% endfor %}
+  </tbody>
+</thead>
+</table>
+</div>
+
+{% else %}
+<h3 class="header-applications-small">Oops! No application is selected for Referral. 
+  <a href="{% url 'home' %}" style="text-decoration: underline;">
+    Apply more
+  </a>
+</h3>
+{% endif %}
+
+{% if pending %}
+<h1 class="header-applications">
+  <b>Pending Applications</b>
+</h1>
+<table class="styled-table">
+  <thead>
+    <tr>
+      <th>Recruiter</th>
+      <th>Company</th>
+      <th>Position</th>
+      <th>Applied</th>
+      <th>Status</th>  
+      <th>
+        Your Resume
+      </th>
+      <th>
+        Update Application
+      </th>
+    </tr>
+  </thead>
+  
+  <tbody>
+
+    {% for application in pending %}
+    <tr>
+      <td><a href="{% url 'user-profile' application.opportunity.recruiter.id %}">{{ application.opportunity.recruiter }}</a></td>
+      <td>{{ application.opportunity.company }}</td>
+      <td> <a href="{% url 'room' application.opportunity.id %}">{{ application.opportunity.position }}</a></td>
+      <td>{{application.applied|timesince}} ago</td>
+      <td>
+        <p class="status-panding">Not Viewed</p>
+      </td>
+      <td>{% if application.resume %}
+        <a href="{{application.resume.url}}" target="_blank">View</a>
+        {% else %}
+        <p>No Resume Provided!</p>
+        {% endif %}
+      </td>
+      <td>
+        <a href="{% url 'update-application' application.id %}">Update</a>
+      </td>
+      
+    </tr>
+
+    {% endfor %}
+    
+  </tbody>
+</table>
+{% else %}
+<h3 class="header-applications-small">No pending applications
+  <a href="{% url 'home' %}" style="text-decoration: underline;">
+    Apply Now
+  </a>
+</h3>
+{% endif %}
+
+{% endblock %}
+
+    
+
+  
+
+

@@ -1,0 +1,143 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<h1 class="header-applications">
+  <b>Applications for {{job.position}} position at {{job.company}}</b>
+</h1>
+
+<h2 style="text-align: center;"> <a href="{% url 'room' job.id %}" style="text-decoration: underline;">Back to opportunity</a> </h2>
+
+{% if applications %}
+<div class= "table-container">
+<table class="styled-table">
+  <thead>
+    <tr>
+      <th>Applicant</th>
+      <th>Applied</th>
+      <th>
+        Resume
+      </th>
+      <th>
+        Linkedin Profile
+      </th>
+      <th>Experience (in Years)</th>
+      <th>Email</th>
+      <th></th>  
+      
+    </tr>
+  </thead>
+  
+  <tbody>
+    {% for application in applications %}
+    <tr>
+      <td>
+        <a href="{% url 'user-profile' application.applicant.id %}">{{ application.applicant.name }}</a></td>
+      <td>{{application.applied|timesince}} ago</td>
+      
+      <td>
+        {% if application.resume %}
+        <a href="{{application.resume.url}}" target="_blank">View</a>
+        {% else %}
+        <p>No Resume Provided!</p>
+        {% endif %}
+      </td>
+      <td>
+        {% if application.applicant.linkedin is not None %}
+        <a href="{{ application.applicant.linkedin }}" target="_blank">View</a>
+        {% else %}
+        <p>No Linkedin Profile link provided</p>
+        {% endif %}
+      </td>
+      <td>
+        {% if application.experience is not None %}
+        {{ application.experience }}
+        {% else %}
+        NA
+        {% endif %}
+      </td>
+      <td>{{application.applicant.email}}</td>
+      
+      <td class="selection-buttons" style="justify-content: center;">
+        <a href="{% url 'select-application' application.opportunity.id application.applicant.id %}" class="accept">
+          <span class="fa fa-check"></span>
+        </a>
+        <a href="{% url 'reject-application' application.id %}" class="deny">
+          <span class="fa fa-close"></span>
+        </a>
+      </td>
+    </tr>
+
+    {% endfor %}
+    
+  </tbody>
+</table>
+</div>
+
+{% else %}
+<h3 class="header-applications-small">Oops! No pending application for this position. 
+</h3>
+
+{% endif %}
+
+<br>
+<br>
+{% if selected %}
+<h1 class="header-applications">
+  <b>Selected Applications for {{job.position}} position at {{job.company}}</b>
+</h1>
+<div class= "table-container">
+<table class="styled-table">
+  <thead>
+    <tr>
+      <th>Applicant</th>
+      <th>Applied</th>
+      <th>
+        Resume
+      </th>
+      <th>
+        Linkedin Profile
+      </th>
+      <th>Experience (in Years)</th>
+      <th>Email</th>
+    </tr>
+  </thead>
+  
+  <tbody>
+    {% for application in selected %}
+    <tr>
+      <td><a href="{% url 'user-profile' application.applicant.id %}">{{ application.applicant.name }}</a></td>
+      <td>{{application.applied|timesince}} ago</td>
+      
+      <td>
+        {% if application.resume %}
+        <a href="{{application.resume.url}}" target="_blank">View</a>
+        {% else %}
+        <p>No Resume Provided!</p>
+        {% endif %}
+      </td>
+      <td>
+        {% if application.applicant.linkedin is not None %}
+        <a href="{{ application.applicant.linkedin }}" target="_blank">View</a>
+        {% else %}
+        <p>No Linkedin Profile link provided</p>
+        {% endif %}
+      </td>
+      <td>{{application.experience}}</td>
+      <td>{{application.applicant.email}}</td>
+      
+    </tr>
+
+    {% endfor %}
+    
+  </tbody>
+</table>
+</div>
+
+{% else %}
+<h3 class="header-applications-small">No application is selected for refferal for this position. View some pending Applications if any</h3>
+
+{% endif %}
+
+{% endblock %}
+

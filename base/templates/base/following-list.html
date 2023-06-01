@@ -1,0 +1,18 @@
+<div class="topics">
+    <h3 class="participants__top">Following</h3>
+    <div class="following__list scroll">
+      
+      {% for user in following%}
+      <a href="{% url 'user-profile' user.id %}" class="participant">
+        <div class="avatar avatar--medium">
+          <img src="{{ user.avatar.url }}" />
+        </div>
+        <p style="color:#023875">
+         {{user.name}}
+          @{{user.username}}
+        </p>
+      </a>
+      {% endfor %}
+      
+    </div>
+</div>

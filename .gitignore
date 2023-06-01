@@ -1,0 +1,11 @@
+*.pyc
+*~
+__pycache__
+.env
+env/
+db.sqlite3
+static/
+Thumbs.db*
+ehthumbs*.db
+[Dd]esktop.ini
+$RECYCLE.BIN/

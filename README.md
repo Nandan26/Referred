@@ -16,7 +16,7 @@
 
 ### Idea behind the project
 Tired of witing messages to the company employees of top product based companies for refferals and not hearing back from them ❌  
-As company emplayee not able to keep up with the various messages for refferal ❌ and want to earn refferal bonus as well 😃  
+As company employee not able to keep up with the various messages for refferal ❌ and want to earn refferal bonus as well 😃  
 That was the reason to create this project...
 
 ### About

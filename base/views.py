@@ -247,6 +247,7 @@ def create_room(request):
             skills = request.POST.get('skills'),
             experience = request.POST.get('experience'),
             location = request.POST.get('location'),
+            link = request.POST.get('link'),
             total_applications = 0
         )
         # line 159 to 165 implementation using the form 
@@ -288,6 +289,7 @@ def update_room(request, room_id):
         room.skills = request.POST.get('skills')
         room.experience = request.POST.get('experience')
         room.location = request.POST.get('location')
+        room.link = request.POST.get('link')
         
         room.save()
         return redirect('room',room_id)

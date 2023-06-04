@@ -21,7 +21,7 @@ class User(AbstractUser):
 
     avatar = models.ImageField(upload_to = 'images/', null=True, default="images/avatar.svg")
 
-    followers = models.ManyToManyField("self", blank=True)
+    followers = models.ManyToManyField("self",related_name = 'following', blank=True, symmetrical=False)
     
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['username','name']

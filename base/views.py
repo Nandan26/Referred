@@ -366,7 +366,7 @@ def user_profile(request, user_id):
     number_of_followers = len(followers)
     following = {}
     if request.user == user:
-        following = user.followers.all()
+        following = user.following.all()
 
     context = {
         'rooms':rooms, 
@@ -423,7 +423,7 @@ def following(request):
     user = request.user
     following = {}
     if request.user == user:
-        following = user.followers.all()
+        following = user.following.all()
     
     return render(request, 'base/following-listpage.html', {'following_list': following})
 

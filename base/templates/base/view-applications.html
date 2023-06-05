@@ -43,14 +43,14 @@
         {% endif %}
       </td>
       <td>
-        {% if application.applicant.linkedin is not None %}
+        {% if application.applicant.linkedin %}
         <a href="{{ application.applicant.linkedin }}" target="_blank">View</a>
         {% else %}
         <p>No Linkedin Profile link provided</p>
         {% endif %}
       </td>
       <td>
-        {% if application.experience is not None %}
+        {% if application.experience %}
         {{ application.experience }}
         {% else %}
         NA
@@ -117,7 +117,7 @@
         {% endif %}
       </td>
       <td>
-        {% if application.applicant.linkedin is not None %}
+        {% if application.applicant.linkedin  %}
         <a href="{{ application.applicant.linkedin }}" target="_blank">View</a>
         {% else %}
         <p>No Linkedin Profile link provided</p>

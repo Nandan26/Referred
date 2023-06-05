@@ -28,7 +28,7 @@
         <div class="participants">
         <h3 class="participants__top">Experience Required (in Years)</h3>
         <div class="participants__list_dummy scroll">
-        {% if room.experience is not None%}
+        {% if room.experience%}
         <p style="color:var(--color-dark)">{{room.experience}}</p>
         {% else %}
         <p style="color:var(--color-dark)">Fresher</p>
@@ -40,7 +40,7 @@
         <!-- <h3 class="participants__top">Link to career Page</h3> -->
         <div class="participants__list_dummy scroll">
         <p style="color:var(--color-dark)"> Go to Career Page of Company 
-            {% if room.link is not None %}
+            {% if room.link %}
             <a href="{{ room.link }}" style="color: var(--color-dark); text-decoration: underline;">(You can direct apply here)</a></p>
             {% else %}
             <p style="color: var(--color-dark);">(Link not Provided)</p>

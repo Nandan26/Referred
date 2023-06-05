@@ -76,7 +76,7 @@
               {% for field in form%}
               <div class="form__group form__group">
                 <label for="room_name">{{field.label}}
-                  {% if field.help_text is not None and field.label == 'Name'%}
+                  {% if field.help_text and field.label == 'Name'%}
                     ({{ field.help_text }})
                   {% elif field.label == 'Password'%}
                   {{ field.help_text}}

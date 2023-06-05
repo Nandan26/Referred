@@ -65,7 +65,7 @@
           <br>
           <p style="color: var(--color-dark-medium);">
             Linkedin Profile: 
-            {% if user.linkedin is not None %}
+            {% if user.linkedin %}
             <a href="{{ user.linkedin }}" style="text-decoration: underline;">
             {{ user.linkedin }}
             </a>

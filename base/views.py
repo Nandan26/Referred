@@ -45,7 +45,7 @@ def login_page(request):
 
         user = authenticate(request, email = email, password = password)
 
-        if user is not None:
+        if user:
             login(request, user)
 
             return redirect('home')
@@ -180,7 +180,7 @@ def room(request, room_id):
         user_application = None
 
     already_applied = False
-    if user_application is not None:
+    if user_application :
         already_applied = True
        
     already_selected = Selected.objects.filter(applicant_id=request.user.id).filter(opportunity_id = room_id).exists()
@@ -195,7 +195,7 @@ def room(request, room_id):
 
     skill_set = set()
 
-    if room.skills is not None:
+    if room.skills:
         skills = room.skills.split(',')
         for skill in skills:
             s=skill.strip()
@@ -220,7 +220,7 @@ def room_details(request, room_id):
     room = Room.objects.get(id=room_id)
     skill_set = set()
 
-    if room.skills is not None:
+    if room.skills :
         skills = room.skills.split(',')
         for skill in skills:
             s=skill.strip()

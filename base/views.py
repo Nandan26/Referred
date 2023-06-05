@@ -45,7 +45,7 @@ def login_page(request):
 
         user = authenticate(request, email = email, password = password)
 
-        if user:
+        if user is not None:
             login(request, user)
 
             return redirect('home')
@@ -180,7 +180,7 @@ def room(request, room_id):
         user_application = None
 
     already_applied = False
-    if user_application :
+    if user_application is not None:
         already_applied = True
        
     already_selected = Selected.objects.filter(applicant_id=request.user.id).filter(opportunity_id = room_id).exists()

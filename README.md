@@ -8,7 +8,9 @@
   <p align="center">
     <h3>A website to get referrals for top product based company interviews</h3>
     <br />
-    <a href="https://github.com/Nandan26/Referred">View Demo</a>
+    <a href="http://nandan26.pythonanywhere.com/">Live</a>
+    ·
+    <a href="https://youtu.be/jAAV5gC2sfM">Watch Demo Video</a>
     ·
     <a href="https://github.com/Nandan26/Referred/issues">Report Bug</a>
   </p>
